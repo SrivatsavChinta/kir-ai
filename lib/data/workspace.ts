@@ -1,5 +1,6 @@
 import "server-only";
 
+import { io } from "next/cache";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 import { dbError, SESSION_EXPIRED } from "@/lib/data/errors";
@@ -114,6 +115,7 @@ export async function loadWorkspace(): Promise<{ ok: true; value: Workspace } | 
   const session = await requireSession();
   if (!session.ok) return session;
   const { supabase, userId, email } = session;
+  await io();
   const asOf = new Date().toISOString();
   const today = toCalendarDate(asOf);
 

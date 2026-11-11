@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { io } from "next/cache";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
@@ -37,6 +38,8 @@ async function AuthorizeDecision({
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
+  // The Supabase session check reads the current time. Defer it to the request.
+  await io();
   const params = await searchParams;
   const query = new URLSearchParams();
   for (const [key, value] of Object.entries(params)) {

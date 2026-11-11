@@ -1,3 +1,4 @@
+import { io } from "next/cache";
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
 
@@ -29,6 +30,9 @@ async function LandlordWorkspace({ children }: { children: React.ReactNode }) {
     );
   }
 
+  // Session checks and rent dates read the current time. Partial prefetching
+  // still rejects that until the dynamic stage, which cookies() does not reach.
+  await io();
   const supabase = await createClient();
   const { data } = await supabase.auth.getUser();
   if (!data.user) redirect("/login");

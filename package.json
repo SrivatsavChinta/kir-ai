@@ -6,12 +6,29 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "db:check": "tsx scripts/check-backend.ts",
+    "db:seed-demo": "tsx scripts/seed-demo.ts",
+    "db:verify-rls": "tsx scripts/verify-rls.ts",
+    "test": "node --conditions react-server --import tsx --test tests/**/*.test.ts",
+    "test:mcp-live": "node --conditions react-server --import tsx scripts/verify-mcp.ts"
   },
   "dependencies": {
+    "@base-ui/react": "^1.9.0",
+    "@modelcontextprotocol/server": "^2.4.0",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.119.0",
+    "class-variance-authority": "^0.7.1",
+    "cn": "^0.5.2",
+    "lucide-react": "^1.72.0",
     "next": "16.4.6",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "server-only": "^0.0.1",
+    "shadcn": "^4.23.0",
+    "tw-animate-css": "^1.4.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "4.3.3",
@@ -21,6 +38,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "tailwindcss": "4.3.3",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }
